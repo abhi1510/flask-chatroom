@@ -1,0 +1,71 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+
+
+
+<div class="wrapper">
+
+    <nav id="sidebar">
+        <div class="header d-flex justify-content-between">
+            <img class="user-img" src="{{ url_for('static', filename='img/user.png') }}" alt="">
+            <div class="user-info mt-1">
+                <h6>Abhinav Kumar</h6>
+                <p>
+                    <span>Status: Available</span>
+                    <i class="fa fa-check-circle text-success" aria-hidden="true"></i></p>
+            </div>
+        </div>
+        <div class="search">
+            <input type="text" class="form-control" placeholder="Search rooms">
+        </div>
+        <ul class="sidebar-menu">
+            {% for room in rooms %}
+            <li class="d-flex justify-content-between">
+                <img src="{{ url_for('static', filename='img/user.png') }}" alt="">
+                <div class="room">
+                    <h6>
+                        {{ room|title }}
+                    </h6>
+                    <p>Some room description</p>
+
+                </div>
+            </li>
+            {% endfor %}
+        </ul>
+    </nav>
+
+    <div id="content">
+        <div class="header shadow-sm">
+            <h5 id="room_name">Lounge Chat room</h5>
+            <button class="btn btn-primary btn-sm">
+                <i class="fa fa-plus"></i> Add Room
+            </button>
+        </div>
+        <div class="message-section"></div>
+        <div class="input-section">
+            <div class="input-group">
+                <input type="text" id="user_message" class="form-control form-control-lg"
+                    placeholder="Type a message here.." autocomplete="off">
+                <div class="input-group-append">
+                    <button class="btn btn-primary" type="button" id="send_message">
+                        <i class="fa fa-paper-plane"></i> Send
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Get Username -->
+<script>
+    const username = `{{username|e}}`;
+</script>
+
+{% endblock %}
+
+{% block script %}
+<script src="//cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js"></script>
+<script src="{{ url_for('static', filename='js/socketio.js') }}"></script>
+{% endblock %}
